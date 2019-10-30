@@ -93,6 +93,6 @@ class Filter
 $filter = new Filter(['f', 2, 't', 7, 2, 'k']);
 
 var_dump($filter->getNumbers()); 		// [2,7,2]
-var_dump($filter->getStrings()); // ['f', 't', 'k']
+var_dump($filter->getStrings()); 		// ['f', 't', 'k']
 
 
