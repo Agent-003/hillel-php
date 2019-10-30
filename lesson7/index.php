@@ -16,16 +16,25 @@
 
 abstract class User
 {
+	public $data=[];
+
 	abstract public function getRole();
+
+	public function __set($name, $value)
+	{
+		$this->data[$name] = $value;
+
+		if (!isset($this->date['role'])) {
+			$this->data['role']= $this->getRole();
+		}
+	}
 }
-
-
 
 class Admin extends User
 {
 	public function getRole()
 	{
-		return __CLASS__;
+		return mb_strtolower(__CLASS__);
 	}
 }
 
@@ -33,29 +42,35 @@ class Viewer extends User
 {
 	public function getRole()
 	{
-		return __CLASS__;
+		return mb_strtolower(__CLASS__);
 	}
 }
 
 class Moderator extends User
 {
-public function getRole(){
-		return __CLASS__;
+	public function getRole()
+	{
+		return mb_strtolower(__CLASS__);
 	}
-
 }
 
-
 $admin=new Admin();
-echo $admin->getRole();
+$admin->getRole();
+$admin->login="sysadmin";
+$admin->pass="password";
+var_dump($admin);
 
 $viewer=new Viewer();
 echo $viewer->getRole();
+$viewer->login="userrrr";
+$viewer->pass="password";
+var_dump($viewer);
 
 $moderator=new Moderator();
 echo $moderator->getRole();
-
-
+$moderator->login="modeeer";
+$moderator->pass="password";
+var_dump($moderator);
 
 /*
  *
@@ -102,6 +117,7 @@ interface Transport
 
 class AllTransports implements Transport {
 
+	public $speed;
 	public $caterpillar=null;
 
 	public function accelerate($speed = NULL)
@@ -134,9 +150,8 @@ class AllTransports implements Transport {
 	}
 }
 
-class Car extends AllTransports {
+class Car extends AllTransports implements Transport {
 
-	public $speed;
 	public $doors=4;
 	public $motor='Мотор';
 	public $wheel=4;
@@ -147,19 +162,17 @@ class Car extends AllTransports {
 	}
 }
 
-class Bike extends AllTransports
+class Bike extends AllTransports implements Transport
 {
-	public $speed;
 	public $doors=2;
 	public $motor='Мускул';
 	public $wheel=4;
-
 }
 
-class Tank extends AllTransports {
+class Tank extends AllTransports implements Transport
+{
 
 	public $caterpillar=2;
-	public $speed;
 	public $motor='Мотор';
 
 	public function fire() {
@@ -167,41 +180,25 @@ class Tank extends AllTransports {
 	}
 }
 
-
 $car = new Car();
-echo $car->getWheelCount(); 				// вернет количество колес
-echo "<br>";
-echo $car->getDoorsCount(); 				// вернет количество дверей
-echo "<br>";
-echo $car->getMotorType(); 					// вернет тип двигателя: мотор или мускулы
-echo "<br>";
-echo $car->accelerate(10);			// установить скорость 10 км/ч
-echo "<br>";
-echo $car->decelerate(5); 	// уменьшить скорость до 5 км/ч
-echo "<br>";
+echo $car->getWheelCount(); 	// вернет количество колес
+echo $car->getDoorsCount(); 	// вернет количество дверей
+echo $car->getMotorType(); 		// вернет тип двигателя: мотор или мускулы
+echo $car->accelerate(10);		// установить скорость 10 км/ч
+echo $car->decelerate(5); 		// уменьшить скорость до 5 км/ч
 echo $car->getСaterpillar();
-echo "<br>";
 
 $bike = new Bike();
 echo $bike->getWheelCount(); 	// вернет количество колес
-echo "<br>";
 echo $bike->getMotorType(); 	// вернет тип двигателя: мотор или мускулы
-echo "<br>";
 echo $bike->accelerate(10); 	// установить скорость 10 км/ч
-echo "<br>";
 echo $bike->decelerate(5); 		// уменьшить скорость до 5 км/ч
-echo "<br>";
 
 
 $tank = new Tank();
 echo $tank->fire(); 			// сделать выстрел, "Бах"
-echo "<br>";
 echo $tank->getСaterpillar(); 	// вернет количество траков гусеницы
-echo "<br>";
 echo $tank->getMotorType(); 	// вернет тип двигателя: мотор или мускулы
-echo "<br>";
 echo $tank->accelerate(10); 	// установить скорость 10 км/ч
-echo "<br>";
 echo $tank->decelerate(5); 		// уменьшить скорость до 5 км/ч
-echo "<br>";
 echo $tank->fire(); 			// сделать выстрел, "Бах"
