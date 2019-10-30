@@ -30,9 +30,6 @@ $stringFormater = new StringFormater();
 $stringFormater->name = 'uSeRnaMe';
 echo $stringFormater->name;
 
-echo "<br>";
-echo "<hr>";
-echo "<br>";
 /*
 2) Напишите класс который умеет заменять в строке пробелы на знак +, а строку приводить в нижний регистр . Вызов должен
 быть следующий:
@@ -54,9 +51,6 @@ class Concatenator {
 $concatenated = Concatenator::prepareString('I am concatenated');
 echo $concatenated;
 
-echo "<br>";
-echo "<hr>";
-echo "<br>";
 
 /*
 3) Напишите класс который будет фильтровать массив путем удаления его элементов. Только с использованием магических
