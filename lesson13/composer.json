@@ -1,0 +1,22 @@
+{
+    "name": "hillel/mvcapp",
+    "description": "simple mvc app",
+    "type": "project",
+    "license": "BSD",
+    "authors": [
+        {
+            "name": "Agent-003",
+            "email": "abbasova003@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+	"autoload": {
+		"psr-4": {
+			"App\\": "src/"
+		}
+	},
+    "scripts": {
+        "server": "php -S 192.168.0.253:8000 -t /var/www/html/hillel-php/lesson13/public/ /var/www/html/hillel-php/lesson13/public/index.php"
+  }
+}
